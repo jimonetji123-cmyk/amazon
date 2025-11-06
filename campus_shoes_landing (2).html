@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Hurricane Running Shoes - Special Offer!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1000px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ff4757;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 5px 15px rgba(255,71,87,0.4);
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 80%;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            width: 25px;
+            border-radius: 5px;
+        }
+
+        .content-section {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand {
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #2d3436;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: #ffa502;
+            font-size: 18px;
+        }
+
+        .reviews {
+            color: #636e72;
+            font-size: 14px;
+        }
+
+        .price-section {
+            margin-bottom: 25px;
+        }
+
+        .current-price {
+            font-size: 42px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+
+        .original-price {
+            font-size: 20px;
+            color: #b2bec3;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .features li {
+            padding: 8px 0;
+            color: #2d3436;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #00b894;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .urgency {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #856404;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.5);
+        }
+
+        .guarantee {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #636e72;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .image-section {
+                padding: 20px;
+                min-height: 280px;
+            }
+
+            .slider {
+                height: 320px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .current-price {
+                font-size: 32px;
+            }
+
+            .features li {
+                font-size: 13px;
+                padding: 5px 0;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 16px;
+            }
+
+            .discount-badge {
+                font-size: 14px;
+                padding: 8px 15px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                border-radius: 10px;
+            }
+
+            .image-section {
+                padding: 15px;
+                min-height: 250px;
+            }
+
+            .slider {
+                height: 280px;
+            }
+
+            .content-section {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .current-price {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <div class="discount-badge" id="discountBadge">-48% OFF</div>
+            
+            <div class="slider-container">
+                <div class="slider" id="imageSlider">
+                    <!-- Images will be inserted here by JavaScript -->
+                </div>
+                <div class="slider-dots" id="sliderDots">
+                    <!-- Dots will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="brand" id="brandName">⚡ CAMPUS</div>
+            <h1 id="productTitle">Hurricane Running Shoes - Navy/R.Slate</h1>
+            
+            <div class="rating">
+                <span class="stars" id="stars">★★★★☆</span>
+                <span class="reviews" id="reviews">4.1 (6,077 Reviews)</span>
+            </div>
+            
+            <div class="price-section">
+                <span class="current-price" id="currentPrice">₹879</span>
+                <span class="original-price" id="originalPrice">₹1,699</span>
+            </div>
+            
+            <ul class="features" id="featuresList">
+                <li>Premium Quality Running Shoes</li>
+                <li>FREE Delivery - Arrives before Diwali</li>
+                <li>Comfortable & Durable Design</li>
+                <li>10 Days Easy Return Policy</li>
+            </ul>
+            
+            <div class="urgency" id="urgencyText">
+                ⏰ <strong>Limited Time Offer!</strong> 200+ bought in past month
+            </div>
+            
+            <a href="#" id="ctaButton" target="_blank" class="cta-button">
+                🛒 Buy Now on Amazon
+            </a>
+            
+            <div class="guarantee" id="guaranteeText">
+                🔒 Secure Amazon Payment | ✓ Genuine Product
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // 📝 यहाँ अपना कंटेंट एडिट करें
+        // ============================================
+        
+        const CONFIG = {
+            // Product Images - जितने चाहो उतने add करो (1 से 100 तक!)
+            // 📐 RECOMMENDED IMAGE SIZE: 600x700px (Portrait/Vertical)
+            //    - Aspect Ratio: 6:7 (Portrait orientation best for shoes/products)
+            //    - Desktop: 600x700px
+            //    - Tablet: 500x600px  
+            //    - Mobile: 400x500px
+            //    - Images automatically adjust to fit the space perfectly!
+            
+            images: [
+                "https://m.media-amazon.com/images/I/61JG5jEMeVL._SY695_.jpg",
+                "https://m.media-amazon.com/images/I/71kPXI+K6WL._SY695_.jpg",
+                "https://m.media-amazon.com/images/I/71RoWQ8HXNL._SY695_.jpg",
+                "https://m.media-amazon.com/images/I/71XqK1AUHSL._SY695_.jpg"
+            ],
+            
+            // Discount Badge
+            discountText: "-48% OFF",
+            
+            // Brand Name
+            brandName: "⚡ CAMPUS",
+            
+            // Product Title
+            productTitle: "Hurricane Running Shoes - Navy/R.Slate",
+            
+            // Rating & Reviews
+            starRating: "★★★★☆", // 5 stars के लिए: ★★★★★
+            reviewText: "4.1 (6,077 Reviews)",
+            
+            // Pricing
+            currentPrice: "₹879",
+            originalPrice: "₹1,699",
+            
+            // Features (जितने चाहो उतने add करो)
+            features: [
+                "Premium Quality Running Shoes",
+                "FREE Delivery - Arrives before Diwali",
+                "Comfortable & Durable Design",
+                "10 Days Easy Return Policy"
+            ],
+            
+            // Urgency Message
+            urgencyMessage: "⏰ <strong>Limited Time Offer!</strong> 200+ bought in past month",
+            
+            // CTA Button
+            buttonText: "🛒 Buy Now on Amazon",
+            buttonLink: "https://www.amazon.in/Campus-Hurricane-R-Slate-Running-Shoes9-UK/dp/B0B4KGH3HJ/ref=sr_1_1_sspa?sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1",
+            
+            // Guarantee Text
+            guaranteeText: "🔒 Secure Amazon Payment | ✓ Genuine Product",
+            
+            // Slider Settings
+            autoSlideInterval: 3000 // milliseconds (3000 = 3 seconds)
+        };
+        
+        // ============================================
+        // Image Slider Functionality
+        // ============================================
+        
+        let currentSlide = 0;
+        let slideInterval;
+        
+        function initSlider() {
+            const slider = document.getElementById('imageSlider');
+            const dotsContainer = document.getElementById('sliderDots');
+            
+            // Check if there are images
+            if (CONFIG.images.length === 0) {
+                slider.innerHTML = '<p style="color: #636e72;">No images available</p>';
+                return;
+            }
+            
+            // Create slides for all images
+            CONFIG.images.forEach((imgUrl, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide' + (index === 0 ? ' active' : '');
+                slide.innerHTML = `<img src="${imgUrl}" alt="Product Image ${index + 1}" class="product-image">`;
+                slider.appendChild(slide);
+                
+                // Create dots only if more than 1 image
+                if (CONFIG.images.length > 1) {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot' + (index === 0 ? ' active' : '');
+                    dot.onclick = () => goToSlide(index);
+                    dotsContainer.appendChild(dot);
+                }
+            });
+            
+            // Start auto-slide only if more than 1 image
+            if (CONFIG.images.length > 1) {
+                startAutoSlide();
+            }
+        }
+        
+        function goToSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (slides.length === 0) return;
+            
+            slides[currentSlide].classList.remove('active');
+            if (dots.length > 0) {
+                dots[currentSlide].classList.remove('active');
+            }
+            
+            currentSlide = n;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            
+            slides[currentSlide].classList.add('active');
+            if (dots.length > 0) {
+                dots[currentSlide].classList.add('active');
+            }
+        }
+        
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, CONFIG.autoSlideInterval);
+        }
+        
+        function stopAutoSlide() {
+            clearInterval(slideInterval);
+        }
+        
+        // Pause on hover (only if multiple images)
+        if (CONFIG.images.length > 1) {
+            document.getElementById('imageSlider').addEventListener('mouseenter', stopAutoSlide);
+            document.getElementById('imageSlider').addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+        }
+        
+        // ============================================
+        // Update Content from CONFIG
+        // ============================================
+        
+        function updateContent() {
+            document.getElementById('discountBadge').textContent = CONFIG.discountText;
+            document.getElementById('brandName').textContent = CONFIG.brandName;
+            document.getElementById('productTitle').textContent = CONFIG.productTitle;
+            document.getElementById('stars').textContent = CONFIG.starRating;
+            document.getElementById('reviews').textContent = CONFIG.reviewText;
+            document.getElementById('currentPrice').textContent = CONFIG.currentPrice;
+            document.getElementById('originalPrice').textContent = CONFIG.originalPrice;
+            document.getElementById('urgencyText').innerHTML = CONFIG.urgencyMessage;
+            document.getElementById('ctaButton').textContent = CONFIG.buttonText;
+            document.getElementById('ctaButton').href = CONFIG.buttonLink;
+            document.getElementById('guaranteeText').textContent = CONFIG.guaranteeText;
+            
+            // Update features
+            const featuresList = document.getElementById('featuresList');
+            featuresList.innerHTML = '';
+            CONFIG.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+        }
+        
+        // Initialize everything on page load
+        window.onload = function() {
+            initSlider();
+            updateContent();
+        };
+    </script>
+</body>
+</html>
